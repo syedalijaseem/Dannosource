@@ -6,6 +6,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -14,7 +16,8 @@ import {
   getDoc,
   // setting the document data
   setDoc,
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCncALkkEvdYLycZzbJDPY470ffMDUheA8",
@@ -27,32 +30,22 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
+const storage = getStorage(firebaseApp);
 
-const googleProvider = new GoogleAuthProvider(firebaseConfig);
+const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-/*
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
-
-  console.log(userAuth);
-};
-*/
-
-// might need different providers but don't need multiple auths
 export const auth = getAuth();
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
-export const db = getFirestore();
+export const db = getFirestore(firebaseApp);
 
-// receives user authentication object and stores it inside firestore
-// creates user instance in firestore
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInformation = {}
@@ -68,9 +61,20 @@ export const createUserDocumentFromAuth = async (
     const createdAt = new Date();
 
     try {
+      let accountType;
+      if (userAuth.providerData && userAuth.providerData.length) {
+        // Use the provider data to determine the account type
+        const { providerId } = userAuth.providerData[0];
+        if (providerId === "google.com") {
+          accountType = "Google";
+        } else if (providerId === "password") {
+          accountType = "Email";
+        }
+      }
       await setDoc(userDocRef, {
         displayName,
         email,
+        accountType,
         createdAt,
         ...additionalInformation,
       });
@@ -82,6 +86,22 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
+// Add the following function to get the accountType of the currently logged-in user
+export const getCurrentUserAccountType = async () => {
+  const currentUser = auth.currentUser;
+
+  console.log(currentUser);
+
+  if (currentUser) {
+    const userDocRef = doc(db, "users", currentUser.uid);
+    const userSnapshot = await getDoc(userDocRef);
+    const { accountType } = userSnapshot.data();
+    return accountType;
+  } else {
+    return null;
+  }
+};
+
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
@@ -91,5 +111,17 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
-  return await signInWithEmailAndPassword(auth, email, password);
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    console.log("error signing in the user", error.message);
+  }
 };
+
+export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => {
+  onAuthStateChanged(auth, callback);
+};
+
+export { storage };

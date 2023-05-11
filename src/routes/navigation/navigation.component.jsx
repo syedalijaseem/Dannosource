@@ -1,38 +1,24 @@
 import React from "react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import { Outlet, Link, NavLink } from "react-router-dom";
 
 import { ReactComponent as DannsourceLogo } from "../../assets/dannosource.svg";
+import { UserContext } from "../../contexts/user.context";
+
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
-import { Dropdown, DropdownMenu, DropdownToggle } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
-/*
-const Navigation = () => {
-  return (
-    <Fragment>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
-          <DannsourceLogo className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/workbench">
-            WORKBENCH
-          </Link>
-          <Link className="nav-link" to="/reports">
-            REPORTS
-          </Link>
-          <Link className="nav-link" to="/auth">
-            SIGN IN
-          </Link>
-        </div>
-      </div>
-      <Outlet />
-    </Fragment>
-  );
-};
-*/
 function Navigation() {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  //console.log(currentUser);
+
+  const signOutHandler = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
@@ -62,12 +48,26 @@ function Navigation() {
               </Dropdown.Menu>
             </Dropdown>
           </div>
+          <Link className="nav-link" to="/shop">
+            SHOP
+          </Link>
+          {currentUser ? (
+            <Link className="nav-link" to="/jobs">
+              JOBS
+            </Link>
+          ) : null}
           <Link className="nav-link" to="/workbench">
             WORKBENCH
           </Link>
-          <Link className="nav-link" to="/auth">
-            SIGN IN
-          </Link>
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutHandler}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link className="nav-link" to="/signin">
+              SIGN IN
+            </Link>
+          )}
         </div>
       </div>
       <Outlet />

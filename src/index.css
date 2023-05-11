@@ -1,8 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
+  padding: 1.35rem 2.7rem;
   font-family: "Open Sans Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: g rayscale;
 }
 
 code {
