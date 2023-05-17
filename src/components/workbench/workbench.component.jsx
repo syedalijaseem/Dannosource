@@ -1,24 +1,38 @@
 import React, { useState } from "react";
-import ImageUploader from "./image-uploader.component";
-import ImageHolder from "./image-holder.component";
-import CanvasDisplay from "./canvas-display.component";
+import ReactImageAnnotate from "react-image-annotate";
 
-const Workbench = () => {
-  const [images, setImages] = useState([]);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
-  const selectedImage =
-    selectedImageIndex !== null ? images[selectedImageIndex] : null;
+const ImageAnnotationTool = ({ imageUrl, regionClsList }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  console.log(regionClsList);
+
+  const images = imageUrl.map((url) => ({ src: url }));
+
+  const handleNextImage = () => {
+    setSelectedIndex((selectedIndex + 1) % images.length);
+  };
+
+  const handlePrevImage = () => {
+    const newSelectedIndex = (selectedIndex - 1) % images.length;
+    setSelectedIndex(newSelectedIndex >= 0 ? newSelectedIndex : 0);
+  };
+
+  const handleExit = (mainLayoutState) => {
+    console.log(mainLayoutState.images);
+  };
 
   return (
-    <div className="flex">
-      <ImageHolder
-        images={images}
-        setSelectedImageIndex={setSelectedImageIndex}
-      />
-      <CanvasDisplay selectedImage={selectedImage} />
-      <ImageUploader setImages={setImages} />
-    </div>
+    <ReactImageAnnotate
+      labelImages
+      regionClsList={regionClsList}
+      images={images}
+      selectedImage={selectedIndex}
+      onNextImage={handleNextImage}
+      onPrevImage={handlePrevImage}
+      enabledTools={["create-box", "create-polygon", "create-point"]}
+      onExit={handleExit}
+    />
   );
 };
 
-export default Workbench;
+export default ImageAnnotationTool;

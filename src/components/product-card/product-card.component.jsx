@@ -1,3 +1,4 @@
+import React from "react";
 import "./product-card.styles.scss";
 
 import Button from "../button/button.component";

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../utils/firebase/firebase.utils";
 import { useJobsContext } from "../../contexts/jobs.context";
+import AcceptProposalButton from "../accept-proposal-button/accept-proposal-button.component";
 
 const ProposalsDisplay = ({ jobId }) => {
   const [proposals, setProposals] = useState([]);
@@ -38,8 +39,8 @@ const ProposalsDisplay = ({ jobId }) => {
           {proposals.map((proposal) => (
             <li key={proposal.id}>
               <p>{proposal.description}</p>
-              <p>Pay: ${proposal.pay}</p>
-              {/* Add any other proposal fields you want to display */}
+              <p>Pay: ${proposal.price}</p>
+              <AcceptProposalButton proposalId={proposal.id} />
             </li>
           ))}
         </ul>

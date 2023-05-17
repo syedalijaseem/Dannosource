@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import { UserContext } from "./contexts/user.context";
 import Home from "./routes/home/home.component";
-import Workbench from "./components/workbench/workbench.component";
 import Navigation from "./routes/navigation/navigation.component";
 import Shop from "./routes/shop/shop.component";
 import SignInForm from "./components/sign-in-form/sign-in-form.component";
@@ -12,6 +11,10 @@ import JobsPage from "./components/jobs-page/jobs-page.component";
 import CreateJob from "./components/create-job/create-job.component";
 import ProposalForm from "./components/job-proposal/job-proposal.component";
 import CreatedJobsDisplay from "./components/created-jobs/created-jobs.component";
+import AcceptedProposals from "./components/accepted-proposals/accepted-proposals.component";
+import ImageAnnotationTool from "./components/workbench/workbench.component";
+
+import "tailwindcss/tailwind.css";
 
 const App = () => {
   const { currentUser } = useContext(UserContext);
@@ -21,11 +24,12 @@ const App = () => {
       {currentUser ? (
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
-          <Route path="workbench" element={<Workbench />} />
           <Route path="shop" element={<Shop />} />
           <Route path="createjobs" element={<CreateJob />} />
           <Route path="jobs" element={<JobsPage />} />
           <Route path="createdjobs" element={<CreatedJobsDisplay />} />
+          <Route path="acceptedproposals" element={<AcceptedProposals />} />
+          <Route path="image" element={<ImageAnnotationTool />} />
           <Route
             exact
             path="jobs/:jobId/proposals"

@@ -6,8 +6,11 @@ import App from "./App";
 import { UserProvider } from "./contexts/user.context";
 import { ProductsProvider } from "./contexts/products.context";
 import { JobsProvider } from "./contexts/jobs.context";
+import { ProposalProvider } from "./contexts/proposal.context";
 
 import "./index.css";
+import "flowbite";
+import "tailwindcss/tailwind.css";
 
 const rootElement = document.getElementById("root");
 
@@ -17,7 +20,9 @@ render(
       <UserProvider>
         <ProductsProvider>
           <JobsProvider>
-            <App />
+            <ProposalProvider>
+              <App />
+            </ProposalProvider>
           </JobsProvider>
         </ProductsProvider>
       </UserProvider>

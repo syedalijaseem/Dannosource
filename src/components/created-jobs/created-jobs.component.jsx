@@ -10,7 +10,7 @@ const CreatedJobsDisplay = () => {
   const [selectedJobId, setSelectedJobId] = useState("");
 
   // Filter the jobs to get only the ones created by the current user
-  const createdJobs = jobs.filter((job) => job.userId === currentUser.uid);
+  const createdJobs = jobs.filter((job) => job.userId === currentUser?.uid);
 
   const handleViewProposalsClick = (jobId) => {
     setSelectedJobId(jobId);
@@ -36,9 +36,10 @@ const CreatedJobsDisplay = () => {
                   : "View Proposals"}
               </button>
               {showProposals && selectedJobId === job.id && (
-                <ProposalsDisplay jobId={job.id} />
+                <>
+                  <ProposalsDisplay userId={currentUser?.uid} jobId={job.id} />
+                </>
               )}
-              {/* Add any other job fields you want to display */}
             </li>
           ))}
         </ul>

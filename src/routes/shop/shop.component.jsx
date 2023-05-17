@@ -1,5 +1,6 @@
 // This page will display the current job listings
 // instead of importing shop_data, display current job listings
+import React from "react";
 import { useContext } from "react";
 
 import { ProductsContext } from "../../contexts/products.context";
