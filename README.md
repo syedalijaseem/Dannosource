@@ -27,44 +27,37 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Note:
+This project requires python 2.7.15 to run as React-Image-Annotate is dependent on python 2.7.15.
 
-### `npm run eject`
+The following are some of the pages of the web app:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### **Landing Page:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![image](https://github.com/syedalijaseem/Dannosource/assets/67862188/23419714-0cfc-4388-80ff-b39c99b41543)
+![image](https://github.com/syedalijaseem/Dannosource/assets/67862188/bc312289-81fc-4c08-8690-a42c009e7c49)
 
-## Learn More
+### **Home Page:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![image](https://github.com/syedalijaseem/Dannosource/assets/67862188/a71f532b-1fd2-499e-8abd-a09e678c3336)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **Annotation Tool:**
 
-### Code Splitting
+![image](https://github.com/syedalijaseem/Dannosource/assets/67862188/b6ac05d8-ca85-4b16-a3f5-b6766205d333)
+![image](https://github.com/syedalijaseem/Dannosource/assets/67862188/5324a917-4b27-4205-b0b9-75150e6f9ca9)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Create Jobs Page:
 
-### Analyzing the Bundle Size
+![image](https://github.com/syedalijaseem/Dannosource/assets/67862188/417b8697-32ac-44db-9f46-8a2d8cd38d7d)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### **Contact Page:**
 
-### Making a Progressive Web App
+![image](https://github.com/syedalijaseem/Dannosource/assets/67862188/027c1b0f-ea32-4b8d-aa00-aa0b3838e9cf)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
